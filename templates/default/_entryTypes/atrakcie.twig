@@ -1,0 +1,45 @@
+{% extends "_layouts/base" %}
+{% set uri = entry.uri|default('blog') %}
+{% set pageHeading = entry.pageHeading|default(entry.title) %}
+
+{% set showSidebar = false %}
+
+{% block pageLayout %}
+  {% embed '_layouts/page/default' %}
+    {% block contentLayout %}
+      {% embed '_layouts/content/default' %}
+
+        {% block mainContent %}
+          {% cache %}
+            <h1 class="main-heading">{{ pageHeading }}</h1>
+
+            {% if entry.intro %}
+              {{ entry.intro }}
+            {% endif %}
+            
+            {% for category in entry.atrakcie1 %}
+              <div style="margin-bottom:20px" class="default-content">
+                <h2>{{ category.title }} </h2>
+
+                {% if category.atrakcie %}
+                  <div class="grid-block">
+                    {% for atrakcia in category.atrakcie %}
+                      <div class="grid-cell">
+                        <a class="grid-image block relative" href="{{ atrakcia.urlAtrakcie }}" target="_blank">
+                          <img src="{{ atrakcia.obrazok.one.url('medium') }}" alt="">
+                          <p class="absolute right-[10px] bottom-[10px] !m-0 text-white bg-black/30 !text-sm px-2 py-1 rounded-md">{{ svg("@webroot/img/map-marker-alt-solid.svg")|attr({class: 'map-icon'}) }} {{ atrakcia.vzdialenost }}km vzdušne</p>
+                        </a>
+                        <h3 class="!mt-2 text-center text-xl"><a href="{{ atrakcia.urlAtrakcie }}">{{ atrakcia.title }}</a></h3>
+                      </div>
+                    {% endfor %}
+                  </div>              
+                {% endif %}
+              </div>
+            {% endfor %}
+            </div>
+          {% endcache %}
+        {% endblock %}
+      {% endembed %}
+    {% endblock %}
+  {% endembed %}
+{% endblock %}

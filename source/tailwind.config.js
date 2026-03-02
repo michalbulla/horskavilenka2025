@@ -5,16 +5,16 @@ module.exports = {
   theme: {
     fontFamily: {
       primary: ['ui-sans-serif', 'sans-serif'],
-      //   secondary: ['ui-sans-serif', 'sans-serif'],
+      secondary: ['Blinker', 'sans-serif'],
     },
     screens: {
       sm: '450px',
       md: '768px',
       lg: '1024px',
-      xl: '1350px',
+      xl: '1100px',
       // We want the maximum container to stop at 1350px
       // so we set the last breakpoint to the same value
-      '2xl': '1350px',
+      '2xl': '1100px',
       // The original Tailwind 2xl breakpoint value
       // '2xl': '1536px',
     },
@@ -25,11 +25,14 @@ module.exports = {
       colors: {
         brand: {
           // put the custom site color here
-          blue: colors.blue[500],
+          'yellow': '#EBB110',
+          'gold': '#B88800',
+          'green': '#52981A',
+          'red': '#ff0000',
         },
         content: {
-          'text': colors.gray[600],
-          'link': colors.blue[700],
+          'text': '#515151',
+          'link': '#00e',
           'h2': colors.gray[600],
           'h3': colors.gray[600],
           'h4': colors.gray[600],
@@ -39,12 +42,17 @@ module.exports = {
             'ring': colors.gray[300],
           },
           table: {
-            'heading': colors.gray[800],
-            'heading-bg': colors.gray[200],
-            'border': colors.gray[400],
-            'grid-row': colors.gray[300],
-            'grid-column': colors.gray[300],
-            'alt-row-bg': colors.gray[200],
+            'heading': '#333',
+            'heading-bg': '#ccc',
+            'border': '#ccc',
+            'grid-row': '#ccc',
+            'grid-column': '#ccc',
+            'alt-row-bg': '#eee',
+          },
+          reveal: {
+            'heading': '#333',
+            'heading-bg': '#f5f5f5',
+            'border': '##ddd',
           },
           doc: {
             'size': colors.gray[700],
@@ -64,7 +72,8 @@ module.exports = {
         // 'callout-red': "url('/img/callout-graphic_red.svg'), linear-gradient(to right, #E7751F, #D33D4C)",
       },
       boxShadow: {
-        // 'btn' : '2px 2px 0 rgba(0, 0, 0, .5)',
+        'btn' : '0 2px 4px rgba(0, 0, 0, .2)',
+        'box' : '0 0 3px rgba(0, 0, 0, 1)',
       },
     },
   },

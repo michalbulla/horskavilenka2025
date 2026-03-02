@@ -45,6 +45,49 @@ if (subNavToggleButton) {
   });
 }
 
+// COOKIES
+if (getCookie("clicklinks") === "yes") {
+  // Show content and hide clicklink
+  document.querySelectorAll('.cookies').forEach(function(el) {
+    el.classList.add('hide');
+  });
+} else {
+  // Hide content and show clicklink
+  document.querySelectorAll('.cookies').forEach(function(el) {
+    el.classList.remove('hide');
+  });
+}
+
+// COOKIES
+function setCookie(e, cname, cvalue, exdays) {
+  e.preventDefault();
+
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toUTCString();
+
+  document.cookie = cname + "=" + cvalue + "; " + expires + ";path=/";
+
+  // Hide cookie elements
+  document.querySelectorAll('.cookies').forEach(function(el) {
+    el.classList.add('hide');
+  });
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i].trim();
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 // ----- Perform actions after the DOM has been fully loaded
 
 documentReady(() => {
@@ -129,7 +172,49 @@ documentReady(() => {
     }
   })(window, document);
 
+  // When click on x, close the popup and set the cookies
+  document.querySelectorAll('.close').forEach(function(closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      // Close the popup
+      document.querySelectorAll('.popup-overlay').forEach(function(popup) {
+        popup.classList.remove('open');
+      });
+
+      // Set Cookie (14 days)
+      var d = new Date();
+      d.setTime(d.getTime() + (14 * 24 * 60 * 60 * 1000));
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = "popupTemp=closed; " + expires + ";path=/";
+    });
+  });
+
 });
+
+// Open POPUP
+  function PopUp() {
+    if (!getCookie('popupTemp') && !getCookie('popupForever')) {
+      document.querySelectorAll('.popup-overlay').forEach(function(popup) {
+        popup.classList.add('open');
+      });
+    }
+  }
+
+  // Get Cookie
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i].trim();
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
 
 // ************************************************************
 // The code below needs to be translated into vanilla JS if needed

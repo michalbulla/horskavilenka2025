@@ -1,0 +1,8 @@
+{% if vyskakovacieOkno.zobrazitOkno == 1 %}
+  <div class="popup-overlay">
+    <div class="popup">
+      <a href="#" class="close">{{ svg("@webroot/img/icons/x-solid-full.svg")|attr({class: 'h-8 w-8 inline-block text-white'}) }}</a>
+      <img src="{{ vyskakovacieOkno.vyskakovacieOknoObrazok.one.url() }}" alt="">
+    </div>
+  </div>
+{% endif %}

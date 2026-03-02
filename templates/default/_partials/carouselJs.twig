@@ -1,0 +1,20 @@
+{% js %}
+  document.addEventListener("DOMContentLoaded", function () {
+  // initialize Swiper when document is ready
+  var mySwiper = new Swiper('.swiper-container', {
+    speed: 900,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    loop: true,
+    autoplay: {
+      delay: {{ entry.carouselInterval|length ? entry.carouselInterval * 1000 : 3000 }},
+    },
+  });
+});
+{% endjs %}

@@ -3,9 +3,9 @@
     {% include '_partials/header' %}
   {% endblock %}
 
-  {% block subNavMobile %}
+  {# {% block subNavMobile %}
     {% include '_partials/nav/subMobile' %}
-  {% endblock %}
+  {% endblock %} #}
 
   <div class="px-4 xl:px-0 xl:container">
     {% block contentLayout %}
@@ -15,5 +15,14 @@
   </div>
 </div>
 {% block footerContent %}
+  {% include '_partials/popup' %}
   {% include '_partials/footer' %}
+  {% include '_partials/cookies' %}
+  {% include "_partials/contactForms" %}
 {% endblock %}
+
+{% js %}
+  setTimeout(() => {
+    PopUp();
+  }, 3000);
+{% endjs %}

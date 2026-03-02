@@ -1,0 +1,43 @@
+</div></div></div></div></div>
+<section class="section-wrap bg-[#F9F4EE] py-8 mb-6">
+  <div class="lg:container px-4">
+    <div class="section {{ block.imagesPosition}} md:flex">
+      {% if block.sectionImages|length %}
+        <div class="section-images flex-grow-0 flex-shrink-0 flex-[60%] mb-6 md:mb-0">
+          <div class="main-image mb-[1px]">
+            <a href="{{ block.sectionImages.one.url('imageFull') }}" class="fancybox" data-fancybox="{{ block.sectionHeading|kebab|slice(0,4) }}">
+              <img src="{{ block.sectionImages.one.url('large') }}" alt="">
+            </a>
+          </div>
+          <div class="thumbnails grid grid-cols-4">
+            {% for image in block.sectionImages|slice(1) %}
+              <a href="{{ image.url('imageFull') }}" class="fancybox col-span-1 mx-[1px] first:ml-0 last:mr-0" data-fancybox="{{ block.sectionHeading|kebab|slice(0,4) }}">
+                <img src="{{ image.url('galleryThumbnail') }}" alt="">
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+      <div class="section-text">
+        <h2 class="font-secondary text-brand-yellow text-4xl mt-2 mb-2 tracking-tight">{{ block.sectionHeading }}</h2>
+        <div class="default-content">
+          {{ block.sectionDescription }}
+        </div>
+        {% if block.sectionButton|length %}
+          <a href="{{ block.sectionButton }}" class="btn">{{ block.sectionButton.label }}</a>
+        {% endif %}
+      </div>
+    </div>
+    {% if block.piktogramySection|length %}
+        <div class="pictograms -mx-4 md:mx-0 flex flex-wrap gap-4 justify-center mt-12 mb-0">
+        {% for pic in block.piktogramySection.all %}
+          <div class="pictogram flex flex-col max-w-[90px] flex-[100px] items-center flex-grow">
+            {{ svg(pic.obrazok.one)|attr({class: 'text-content-text max-h-[28px] max-w-[90px] block mb-2'}) }}
+            <p class="text-sm text-center">{{ pic.popis }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+<div class="default-content"><div class="lg:container px-4">

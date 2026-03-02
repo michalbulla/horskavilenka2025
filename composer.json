@@ -21,9 +21,11 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
+    "clarknelson/craft-recaptcha-3": "^5.0",
     "craftcms/aws-s3": "2.2.3",
     "craftcms/ckeditor": "4.10.1",
     "craftcms/cms": "5.8.15",
+    "craftcms/contact-form": "^3.1",
     "tungsten/tungsten": "^4.0",
     "vaersaagod/seomate": "3.2.0",
     "verbb/expanded-singles": "3.0.3",

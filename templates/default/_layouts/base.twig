@@ -11,6 +11,9 @@
   {% include '_shared/analytics' %}
 
   {# Custom Fonts #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@200;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   {# Favorite Icons #}
   {# Link to the favicons process:
@@ -22,6 +25,9 @@
 
   <!-- Custom styles for this template -->
   <link href="{{ craft.tungsten.assetUrl('styles.css') }}" rel="stylesheet">
+
+  {# Minified Swiper CSS v4.0.5 #}
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
   {% set globalScripts = siteSettings.scripts.all %}
   {% include '_shared/globalScripts' with {globalScripts: globalScripts, position: 'head'} %}
@@ -36,6 +42,9 @@
 
   {# Hyperscript #}
   <script src="https://unpkg.com/hyperscript.org@0.9.5"></script>
+
+  {# Minified Swiper JavaScript v4.0.5 #}
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
   {# Custom Js Files #}
   <script src="{{ craft.tungsten.assetUrl('scripts.js') }}"></script>

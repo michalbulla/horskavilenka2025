@@ -8,5 +8,14 @@
   {% endblock %}
 </div>
 {% block footerContent %}
+  {% include '_partials/popup' %}
   {% include '_partials/footer' %}
+  {% include '_partials/cookies' %}
+  {% include "_partials/contactForms" %}
 {% endblock %}
+
+{% js %}
+  setTimeout(() => {
+    PopUp();
+  }, 3000);
+{% endjs %}

@@ -1,3 +1,5 @@
+/* purgecss start ignore */
+
 html {
   // Set the baseline size upon which all other em sizes are calculated
   font-size: 16px;
@@ -5,10 +7,87 @@ html {
 
 @layer components {
   .main-heading {
-    @apply text-4xl font-semibold;
+    @apply text-4xl font-semibold text-brand-yellow mb-4;
   }
 
   .btn {
-    @apply inline-block uppercase mb-6 py-3 px-4 shadow;
+    @apply inline-block uppercase mb-6 py-3 px-4 shadow-btn text-xl tracking-wider bg-brand-yellow text-white  rounded-md font-secondary font-bold;
   }
+
+  .section
+    .section-text {
+      @apply md:ml-8;
+    }
+
+    &.right {
+    .section-text {
+      @apply -order-1 ml-0 mr-8;
+    }
+  }
+
+  .grid-block {
+    @apply sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-4 md:gap-6;
+
+    .grid-cell {
+      @apply md:col-span-1 mb-6 sm:mb-0;
+    }
+  }
+
+  .cookies {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(rgba(#C6AA5A, .95), rgba(#fff, .95));
+    text-align: center;
+
+    &.hide {
+      display: none !important;
+    }
+
+    p {
+      color: #ffffff;
+      font-weight: bold;
+      padding-top: 1em;
+      font-size: .8em;
+    }
+  }
+
+  #kontakt,
+  #rezervacia {
+    display: none;
+    max-width: 600px;
+    padding: 2em;
+
+    @apply md:min-w-[450px];
+  }
+
+  .error,
+  .errors {
+    color: red;
+  }
+
+  .message.notice {
+    color: green;
+  }
+
+  #meno-vasho-svokra {
+    display: none;
+  }
+
+  #kontakt,
+  #rezervacia  {
+    h2 {
+      margin-top: .5em;
+      margin-bottom: .7em;
+    }
+
+    h3 {
+      margin-top: .6em;
+      margin-bottom: .2em;
+    }
+  }
+
 }
+
+/* purgecss end ignore */

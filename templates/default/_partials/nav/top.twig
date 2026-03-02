@@ -1,7 +1,9 @@
-{% apply spaceless %}
-  <nav class="top-nav">
-    <ul>
-      <li><a href="/blog">From The Tap Blog</a></li>
-    </ul>
-  </nav>
-{% endapply %}
+<div class="top-nav">
+  <div class="hidden md:flex md:justify-end">
+    <a class="text-white flex items-center mr-8 " href="mailto:info@horskavilenka.sk">{{ svg("@webroot/img/icons/envelope-solid.svg")|attr({class: 'text-white w-6 h-6 mr-2'}) }} <span class="hidden lg:inline-block">info@horskavilenka.sk</span></a>
+    <a class="text-white flex items-center mr-8 " href="tel:+421907354874">{{ svg("@webroot/img/icons/mobile-alt-solid.svg")|attr({class: 'text-white w-6 h-6 mr-2'}) }} <span class="hidden lg:inline-block">+421 907 354 874</span></a>
+    <a class="text-white flex items-center mr-4 " class="social" href="https://www.facebook.com/Horsk%C3%A1-V%C3%ADlenka-416590729106310" target="_blank">{{ svg("@webroot/img/icons/facebook-square-brands.svg")|attr({class: 'text-white w-6 h-6 mr-2'}) }}</a>
+    {# <a class="text-white flex items-center mr-8 " class="social" href="https://www.instagram.com/explore/tags/horskavilenka/" target="_blank">{{ svg("@webroot/img/icons/instagram-brands.svg")|attr({class: 'text-white w-6 h-6 mr-2'}) }}</a> #}
+    <a class="text-white flex items-center " class="social" href="https://www.google.com/maps/place/Horsk%C3%A1+V%C3%ADlenka/@48.8505345,19.6286277,17z/data=!3m1!4b1!4m8!3m7!1s0x47157bbca8d23a85:0x49142ae366601e9f!5m2!4m1!1i2!8m2!3d48.8505345!4d19.6308163" target="_blank">{{ svg("@webroot/img/icons/location-dot-solid.svg")|attr({class: 'text-white w-6 h-6 mr-2'}) }}</a>
+  </div>
+</div>

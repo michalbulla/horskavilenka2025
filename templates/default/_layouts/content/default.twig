@@ -1,34 +1,33 @@
 <div id="page">
-  <div id="crumbs" class="hidden md:block">
+  {# <div id="crumbs" class="hidden md:block">
     {% block crumbs %}
       {% include '_partials/nav/crumbs' %}
     {% endblock %}
-  </div>
+  </div> #}
 
   <div id="content" class="flex gap-8 justify-items-start">
     <div id="main-content-start" class="flex-grow max-w-full">
       {% block mainContent %}
         {% cache %}
           <h1 class="main-heading">{{ pageHeading }}</h1>
+
+          {# Piktogramy #}
+          {% if entry.piktogramy|length %}
+            <div class="pictograms flex flex-wrap gap-4 my-8">
+              {% for pic in entry.piktogramy.all %}
+                <div class="pictogram flex flex-col max-w-[95px] flex-[100px] items-center flex-grow">
+                  {{ svg(pic.obrazok.one)|attr({class: 'text-content-text max-h-[28px] block mb-2'}) }}
+                  <p class="text-center text-sm">{{ pic.popis }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
           <div class="default-content">
             {% include '_partials/contentBuilder' with {contentField: entry.mainContent, blocksDir: 'mainContent'} %}
           </div>
         {% endcache %}
       {% endblock %}
     </div>
-
-    {% if showSidebar is defined and showSidebar %}
-      <div id="sidebar" class="hidden w-[280px] flex-shrink-0 md:block">
-        {% block subNav %}
-          {% include '_partials/nav/sub' %}
-        {% endblock %}
-
-        {# {% block sidebarContent %}
-          {% cache %}
-            {% include '_partials/contentBuilder' with {contentField: entry.sidebarContent, blocksDir: 'sidebarContent'} %}
-          {% endcache %}
-        {% endblock %} #}
-      </div>
-    {% endif %}
   </div>
 </div>

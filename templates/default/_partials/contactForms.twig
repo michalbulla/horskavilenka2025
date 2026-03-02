@@ -1,0 +1,175 @@
+<div id="kontakt">
+
+    <h2 class="text-brand-yellow font-semibold font-secondary text-3xl">Napíšte majiteľovi</h2>
+
+    {% macro errorList(errors) %}
+        {% if errors %}
+            <ul class="errors">
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endmacro %}
+
+        
+    {% if craft.app.session.hasFlash('error') %}
+        <p class="message error">Opravte prosím nasledujúce chyby vo formulári.</p>
+    {% endif %}
+
+    {% from _self import errorList %}
+
+    <form method="post" action="" accept-charset="UTF-8">
+        {{ csrfInput() }}
+        {{ redirectInput('thanks/kontakt') }}
+        <input type="hidden" name="action" value="contact-form/send">
+        
+        <input id="meno-vasho-svokra" name="meno-vasho-svokra" type="text">
+
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="from-name">Meno a Priezvisko</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="from-name" type="text" name="fromName" value="{{ message.fromName ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="from-email">Email</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+        </div>
+        {# <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="subject">Adresa</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="subject" type="text" name="message[adresa]" value="{{ message.message.adresa ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('adresa')) }}
+        </div> #}
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="telefon">Telefón</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="telefon" type="text" name="message[telefon]" value="{{ message.message.telefon ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('telefon')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="prichod">Dátum Príchodu</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="prichod" type="text" name="message[prichod]" value="{{ message.message.prichod ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('prichod')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="odchod">Dátum Odchodu</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="odchod" type="text" name="message[odchod]" value="{{ message.message.odchod ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('odchod')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="pocet">Počet osôb(Dospelí/Deti)</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="pocet" type="text" name="message[pocet]" value="{{ message.message.pocet ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('pocet')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label for="message">Správa</label></h3>
+            <textarea class="form-control border border-text-content px-4 py-2 rounded-md mb-4" rows="10" cols="40" id="message" name="message[body]">{{ message.message.body ?? '' }}</textarea>
+            {{ message is defined and message ? errorList(message.getErrors('body')) }}
+        </div>
+
+        {{ craftRecaptcha3({ 
+            action: 'verify',
+            badge: true,
+            success: 'recaptchaSuccess', 
+            failure: 'recaptchaFailure' 
+        }) | raw }}
+
+
+        <input type="submit" value="Odoslať" class="btn">
+    </form>
+</div>
+
+<div id="rezervacia">
+
+    <h2 class="text-brand-yellow font-semibold font-secondary text-3xl">Napíšte majiteľovi</h2>
+
+    {% macro errorList(errors) %}
+        {% if errors %}
+            <ul class="errors">
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endmacro %}
+
+        
+    {% if craft.app.session.hasFlash('error') %}
+        <p class="message error">Opravte prosím nasledujúce chyby vo formulári.</p>
+    {% endif %}
+
+    {% from _self import errorList %}
+
+    <form method="post" action="" accept-charset="UTF-8">
+        {{ csrfInput() }}
+        {{ redirectInput('thanks/rezervacia') }}
+        <input type="hidden" name="action" value="contact-form/send">
+        
+        <input id="meno-vasho-svokra" name="meno-vasho-svokra" type="text">
+
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="from-name">Meno a Priezvisko</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="from-name" type="text" name="fromName" value="{{ message.fromName ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('fromName')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="from-email">Email</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="from-email" type="email" name="fromEmail" value="{{ message.fromEmail ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('fromEmail')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="subject">Adresa</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="subject" type="text" name="message[adresa]" value="{{ message.message.adresa ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('adresa')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="telefon">Telefón</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="telefon" type="text" name="message[telefon]" value="{{ message.message.telefon ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('telefon')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="prichod">Dátum Príchodu</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="prichod" type="text" name="message[prichod]" value="{{ message.message.prichod ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('prichod')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="odchod">Dátum Odchodu</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="odchod" type="text" name="message[odchod]" value="{{ message.message.odchod ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('odchod')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="pocet">Počet osôb(Dospelí/Deti)</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="pocet" type="text" name="message[pocet]" value="{{ message.message.pocet ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('pocet')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label class="control-label" for="vek">Veková kategória skupiny</label></h3>
+            <input class="form-control border border-text-content rounded-md w-full py-2 px-4" id="vek" type="text" name="message[vek]" value="{{ message.message.vek ?? '' }}">
+            {{ message is defined and message ? errorList(message.getErrors('vek')) }}
+        </div>
+        <div class="form-group">
+            <h3 class="font-semibold text-lg"><label for="message">Správa</label></h3>
+            <textarea class="form-control border border-text-content px-4 py-2 rounded-md mb-4" rows="10" cols="40" id="message" name="message[body]">{{ message.message.body ?? '' }}</textarea>
+            {{ message is defined and message ? errorList(message.getErrors('body')) }}
+        </div>
+
+        {{ craftRecaptcha3({ 
+            action: 'verify',
+            badge: true,
+            success: 'recaptchaSuccess', 
+            failure: 'recaptchaFailure' 
+        }) | raw }}
+
+
+        <input type="submit" value="Odoslať" class="btn">
+    </form>
+</div>
+
+
+
+{# <div id="rezervacia">
+<!-- Reservation PLUS start -->
+<script type="text/javascript" src="https://booking.previo.cz/iframe/"></script>
+<iframe src="https://booking.previo.cz/?hotId=743146" scrolling="no" frameborder="0" width="100%" height="2000" name="previo-booking-iframe" id="previo-booking-iframe" allowTransparency="true"></iframe>
+<!-- Reservation PLUS end -->
+</div> #}

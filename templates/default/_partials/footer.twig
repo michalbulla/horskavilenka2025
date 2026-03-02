@@ -1,10 +1,119 @@
-<footer>
-  <div class="mt-8 bg-gray-300">
-    <div class="xl:container">
-      <div class="p-2 md:p-4">
-        <p class="text-sm text-center">&copy;{{ 'now'|date('Y') }} {{ siteName }}. All Rights Reserved.</p>
-        {% include '_partials/signature' %}
+<div class="referencie-wrap bg-[#464646] py-12">
+  {% set referencie = craft.entries.section('referencie').all() %}
+  <div class="lg:container px-4">
+    <h2 class="text-center text-brand-yellow font-bold text-3xl uppercase mb-6 font-secondary">Čo hovoria naši hostia</h2>
+    <div class="referencie-swiper swiper mb-12">
+      <div class="swiper-wrapper">
+        {% for referencia in referencie %}
+          <div class="swiper-slide bg-white shadow-box p-4 min-h-[300px]">
+            <h2 class="font-bold text-lg uppercase">{{ referencia.title }} <span style="text-transform:none; font-size: .85em; font-weight:normal;">({{ referencia.typUbytovanychHosti.label }})</span>   
+              <span style="float:right;">{{ referencia.hodnotenie.value }} {{ svg("@webroot/img/icons/star-solid.svg")|attr({class: 'text-brand-yellow'}) }}</span> 
+            </h2>
+            
+            <p class="italic text-sm text-gray-500 mb-4">Dátum hodnotenia: {{ referencia.postDate | date("d M, Y") }}</p>
+            
+            {% if referencia.plusy|length %}
+              <p class="plusy flex text-sm mb-4">{{ svg("@webroot/img/icons/circle-plus-solid.svg")|attr({class: 'text-green-700 w-7 h-7 mr-4 flex-shrink-0'}) }} {{ referencia.plusy }}</p>
+            {% endif %}
+            {% if referencia.minusy|length %}
+              <p class="minusy flex text-sm mb-4">{{ svg("@webroot/img/icons/circle-minus-solid.svg")|attr({class: 'text-red-600 w-7 h-7 mr-4 flex-shrink-0'}) }} {{ referencia.minusy }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
       </div>
     </div>
+    <div class="btn-wrap">
+      <a href="/referencie" class="btn mx-auto" style="margin:0 auto; ">Všetky referencie</a>
+    </div>
+  </div>
+</div>
+
+<div class="map">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2987.7627527146783!2d19.630816399999986!3d48.85053449999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47157bbca8d23a85%3A0x49142ae366601e9f!2sWellness%20Horsk%C3%A1%20V%C3%ADlenka!5e1!3m2!1ssk!2ssk!4v1744874737655!5m2!1ssk!2ssk" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+
+<footer class="bg-[#505050] py-8">
+  <div class="lg:container px-4">
+    <div class="footer-block md:grid md:grid-cols-3 md:gap-8 mb-8 text-white">
+      
+      <div class="md:col-span-1">
+        <h2 class="text-brand-yellow uppercase text-xl mb-4 font-bold">Ubytovanie</h2>
+        <ul>
+          <li class="py-1"><a class="text-lg" href="/ubytovanie/cela-chata">Celá chata</a></li>
+          <li class="py-1"><a class="text-lg" href="/ubytovanie/apartmany-a-izby">Apartmány</a></li>
+          <li class="py-1"><a class="text-lg" href="/ubytovanie/firemne-pobyty">Firemné pobyty</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-1">
+        <h2 class="text-brand-yellow uppercase text-xl mb-4 font-bold">Služby</h2>
+        <ul>
+          <li class="py-1"><a class="text-lg" href="/wellness">Wellness</a></li>
+          <li class="py-1"><a class="text-lg" href="/stravovanie">Stravovanie</a></li>
+          <li class="py-1"><a class="text-lg" href="/zahrada">Záhrada</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-1">
+        <h2 class="text-brand-yellow uppercase text-xl mb-4 font-bold">Zostaňte v kontakte</h2>
+        <p class="mb-4">
+          <strong>e-mail</strong><br/>
+          <a href="mailto:info@horskavilenka.sk">info@horskavilenka.sk</a>
+        </p>
+        <p class="mb-4">
+          <strong>mobil</strong><br/>
+          <a href="tel:+421907354874">+421 907 354 874</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="text-center">
+      
+        <div class="btn-wrap sideBySide">
+          <a data-fancybox="kontakt" data-src="#kontakt" class="btn cursor-pointer">Kontakt</a>
+        </div>
+        {# <div class="btn-wrap sideBySide">
+          <a data-fancybox="dialog-rezervacia" data-src="#rezervacia" class="btn green">Rezervácia</a>
+        </div> #}
+      </div>
+
+    <p class="text-center text-white copyright">&copy;{{ 'now'|date('Y') }} {{ siteName }}. All Rights Reserved.</p>
   </div>
 </footer>
+
+{% js %}
+  <!-- Initialize Swiper -->
+    var swiper = new Swiper(".referencie-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      autoHeight: false,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        "@0.00": {
+          slidesPerView: 1,
+          spaceBetween: 10,
+        },
+        "@0.75": {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        "@1.00": {
+          slidesPerView: 3,
+          spaceBetween: 40,
+        },
+        "@1.50": {
+          slidesPerView: 3,
+          spaceBetween: 50,
+        },
+      },
+    });
+{% endjs %}

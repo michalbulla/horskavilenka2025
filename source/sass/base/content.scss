@@ -21,18 +21,18 @@
 
 .default-content {
   p {
-    @apply mb-4;
+    @apply mb-4 text-lg;
   }
 
   p,
   li {
     a {
-      @apply text-content-link underline hover:no-underline;
+      @apply text-content-link underline hover:no-underline ;
     }
   }
 
   h2 {
-    @apply font-bold text-content-h2 text-3xl leading-tight mt-8 mb-3;
+    @apply font-bold text-content-h2 font-secondary uppercase text-3xl leading-tight mt-8 mb-6;
 
     + h3,
     + h4 {
@@ -41,7 +41,7 @@
   }
 
   h3 {
-    @apply font-bold text-content-h3 text-xl leading-tight mt-6 mb-2;
+    @apply font-semibold text-content-h3 font-secondary text-xl leading-tight mt-6 mb-2;
 
     + h4 {
       @apply mt-2;
@@ -53,7 +53,7 @@
   }
 
   ul {
-    @apply list-disc list-outside mb-4 pl-4 ml-4;
+    @apply list-disc list-outside mb-4 pl-4 ml-4 ;
   }
 
   ol {
@@ -61,7 +61,7 @@
   }
 
   li {
-    @apply mb-2;
+    @apply mb-2 text-lg;
 
     ul, ol {
       @apply mb-0;

@@ -1,0 +1,41 @@
+{% if block.zobrazitAtrakcie == "true" %}
+  {% set atrakcie = craft.entries.section('atrakcie').limit(block.limit).all() %}
+  {% if block.vzhlad == "0" %}
+    {% set atrakcieHlavne = atrakcie|slice(0,12) %}
+    {% set atrakcieVedlajsie = atrakcie|slice(12) %}
+  {% else %}
+    {% set atrakcieHlavne = atrakcie %}
+    {% set atrakcieVedlajsie = [] %}
+  {% endif %}
+  
+  {% cache %}
+    {% if atrakcie|length %}
+      <section class="mb-12">
+        <h2 class="text-center">Najbližšie atrakcie v okolí</h2>
+        <div class="grid-block">
+          {% for atrakcia in atrakcieHlavne %}
+            <div class="grid-cell">
+              <a class="grid-image block relative" href="{{ atrakcia.urlAtrakcie }}" target="_blank">
+                <img src="{{ atrakcia.obrazok.one.url('medium') }}" alt="">
+                <p class="absolute right-[10px] bottom-[10px] !m-0 text-white bg-black/30 !text-sm px-2 py-1 rounded-md">{{ svg("@webroot/img/map-marker-alt-solid.svg")|attr({class: 'map-icon'}) }} {{ atrakcia.vzdialenost }}km vzdušne</p>
+              </a>
+              <h3 class="!mt-2 text-center text-xl"><a href="{{ atrakcia.urlAtrakcie }}">{{ atrakcia.title }}</a></h3>
+            </div>
+          {% endfor %}
+        </div>
+        {% if atrakcieVedlajsie|length %}
+          <div class="list">
+            <ul>
+              {% for atrakcia in atrakcieVedlajsie %}
+                <li>
+                  <h3><a href="{{ atrakcia.urlAtrakcie }}" target="_blank">{{ atrakcia.title }}</a></h3>
+                  <p>{{ svg("@webroot/img/map-marker-alt-solid.svg")|attr({class: 'map-icon'}) }} {{ atrakcia.vzdialenost }}km vzdušne</p>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </section>
+    {% endif %}
+  {% endcache %}
+{% endif %}

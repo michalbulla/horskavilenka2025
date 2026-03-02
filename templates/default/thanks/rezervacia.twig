@@ -1,0 +1,22 @@
+{% extends "_layouts/base" %}
+
+{% block pageLayout %}
+  {% embed '_layouts/page/defaultNoCarousel' %}
+    {% block contentLayout %}
+      {% block subNavMobile %}
+      
+      {% endblock %}
+      {% embed '_layouts/content/default' %}
+
+        {% block mainContent %}
+          {% cache %}
+            {% if craft.app.session.hasFlash('notice') %}
+              <h1>Ďakujeme za rezerváciu</h1>
+              <p class="message notice">Ďakujeme za Vašu rezerváciu. Ozveme sa Vám hneď, ako to bude možné.</p>
+            {% endif %}
+          {% endcache %}
+        {% endblock %}
+      {% endembed %}
+    {% endblock %}
+  {% endembed %}
+{% endblock %}

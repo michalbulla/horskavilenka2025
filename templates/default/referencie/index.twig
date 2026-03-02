@@ -1,0 +1,147 @@
+{% extends "_layouts/base" %}
+{% set uri = entry.uri|default('blog') %}
+{% set pageHeading = entry.pageHeading|default(entry.title) %}
+
+{% set showSidebar = true %}
+{% set dakujeme = craft.app.request.getParam('dakujeme') %}
+{% set token = craft.app.request.getParam('token') %}
+
+{% block pageLayout %}
+  {% embed '_layouts/page/default' %}
+    {% block contentLayout %}
+      {% embed '_layouts/content/default' %}
+
+        {% block mainContent %}
+            <h1 class="main-heading">{{ pageHeading }}</h1>
+            {% if dakujeme %}
+            <p><br/><strong>Ďakujeme za Vašu referenciu.</strong> <br/><br/> S pozdravom<br/> Tím chaty Zinka</p><br/><br/>
+            {% else %}
+
+              {% if token == "horskavilenka" %}
+                <a href="" class="pridat-referenciu">Pridať referenciu</a>
+              {% endif %}
+                <div class="pridat-referenciu-form">
+
+                  {% macro errorList(errors) %}
+                      {% if errors %}
+                          {{ ul(errors, {class: 'errors'}) }}
+                      {% endif %}
+                  {% endmacro %}
+
+                  {# If there were any validation errors, an `entry` variable will be 
+                    passed to the template, which contains the posted values 
+                    and validation errors. If that’s not set, we’ll default 
+                    to a new entry. #}
+                  {% set entry = entry ?? null %}
+
+                  <form method="post" action="" accept-charset="UTF-8">
+                    {{ csrfInput() }}
+                    {{ actionInput('guest-entries/save') }}
+                    {{ hiddenInput('sectionUid', '4507b073-db31-459b-b027-844c53d26c9c') }}
+                    {{ redirectInput('/referencie?dakujeme=true') }}
+
+                    <div class="form-group">
+                      <label class="control-label" for="title">Meno</label>
+                      <div class="input">
+                        {{ input('text', 'title', '', {
+                          id: 'title',
+                          class: 'form-control',
+                        }) }}
+                      </div>
+                      {{ entry ? _self.errorList(entry.getErrors('title')) }}
+                    </div>
+
+                    {# <div class="form-group">
+                      <label class="control-label" for="title">Email</label>
+                      {{ input('text', 'fields[email]', '', {
+                        id: 'title',
+                        class: 'form-control',
+                      }) }}
+                      {{ _self.errorList(entry.getErrors('title')) }}
+                    </div> #}
+
+                    <div class="form-group">
+                      <label class="control-label" for="typ">Typ hostí</label>
+                      <select name="fields[typUbytovanychHosti]" id="typ" class="form-control">
+                        <option value="skupina">skupina</option>
+                        <option value="rodinaSMalymiDetmi">rodina s malými deťmi</option>
+                        <option value="priatelia">priatelia</option>
+                      </select>
+                      
+                      {{ entry ? _self.errorList(entry.getErrors('typ')) }}
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label" for="hodnotenie">Hodnotenie</label>
+                      <select name="fields[hodnotenie]" id="hodnotenie" class="form-control">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option selected value="10" >10</option>
+                      </select>
+                      {{ entry ? _self.errorList(entry.getErrors('hodnotenie')) }}
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label" for="plusy">Plusy</label>
+                      {{ tag('textarea', {
+                        id: 'plusy',
+                        class: 'form-control',
+                        name: 'fields[plusy]',
+                        text: '',
+                      }) }}
+                      {{ entry ? _self.errorList(entry.getErrors('plusy')) }}
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label" for="minusy">Mínusy</label>
+                      {{ tag('textarea', {
+                        id: 'minusy',
+                        class: 'form-control',
+                        name: 'fields[minusy]',
+                        text: '',
+                      }) }}
+                      {{ entry ? _self.errorList(entry.getErrors('minusy')) }}
+                    </div>
+
+                    <button class="btn" type="submit">Odoslať</button>
+                  </form>
+                </div>
+              {% endif %}
+              
+              {% set referencie = craft.entries.section('referencie').zobrazit(1).orderBy('postDate desc').all %}
+
+              {% if referencie|length %}
+              <div class="referencie default-content">
+                {% for referencia in referencie %}
+                
+                  <div class="referencia">
+                    <h2>{{ referencia.title }} <span style="text-transform:none; font-size: .85em; font-weight:normal;">({{ referencia.typUbytovanychHosti.label }})</span>
+                      
+                      <span style="float:right;">{{ referencia.hodnotenie.value }} {{ svg("@webroot/img/icons/star-solid.svg")|attr({class: 'text-brand-yellow w-6 h-6'}) }}</span> 
+                      
+                    </h2>
+                    
+                    <p class="note">Dátum hodnotenia: {{ referencia.postDate | date("d M, Y") }}</p>
+                    
+                    {% if referencia.plusy|length %}
+                      <p class="plusy">{{ svg("@webroot/img/icons/circle-plus-solid.svg")|attr({class: 'text-brand-green'}) }} {{ referencia.plusy }}</p>
+                    {% endif %}
+                    {% if referencia.minusy|length %}
+                      <p class="minusy">{{ svg("@webroot/img/icons/circle-minus-solid.svg")|attr({class: 'text-brand-red'}) }} {{ referencia.minusy }}</p>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+        {% endblock %}
+      {% endembed %}
+    {% endblock %}
+  {% endembed %}
+{% endblock %}
