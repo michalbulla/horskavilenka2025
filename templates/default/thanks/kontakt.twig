@@ -10,9 +10,11 @@
 
         {% block mainContent %}
           {% cache %}
-            {% if craft.app.session.hasFlash('notice') %}
-              <h1>Ďakujeme za správu</h1>
-              <p class="message notice">Ďakujeme za Vašu správu. Ozveme sa Vám hneď, ako to bude možné.</p>
+            {% if craft.app.session.hasFlash('success') %}
+              <div class="lg:container px-4">
+                <h1 class="main-heading">Ďakujeme za správu</h1>
+                <p class="message notice text-xl mb-8">Ďakujeme za Vašu správu. Ozveme sa Vám hneď, ako to bude možné.</p>
+              </div>
             {% endif %}
           {% endcache %}
         {% endblock %}
